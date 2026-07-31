@@ -4,7 +4,7 @@ import { mkdir, writeFile } from 'node:fs/promises';
 const chrome = process.env.SEJF_QA_CHROME || '/home/andrii_zinchuk/.cache/sejf-qa-chrome/chrome-headless-shell-linux64/chrome-headless-shell';
 const base = process.env.BASE_URL || 'http://127.0.0.1:4177';
 const widths = [320,390,768,1366,1920,2560,3840];
-const routes = ['/', '/uslugi.html', '/jak-pracujemy.html', '/realizacje.html', '/kontakt.html', '/portal.html'];
+const routes = ['/', '/uslugi.html', '/jak-pracujemy.html', '/weryfikacja-jakosci.html', '/realizacje.html', '/kontakt.html', '/portal.html'];
 const results = [];
 await mkdir('qa/matrix', { recursive:true });
 
