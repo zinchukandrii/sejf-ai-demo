@@ -1,73 +1,154 @@
-import { animate, stagger } from './vendor/anime.esm.js';
+const $ = (selector, root = document) => root.querySelector(selector);
+const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
+const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const publicHost = /github\.io$/i.test(location.hostname);
 
-const routes = {
-  public: { label: 'API UE', note: 'Niski koszt, szybki start, dane niesensytywne.' },
-  internal: { label: 'Sovereign cloud', note: 'Kontrolowany region UE, prywatna sieć, audyt dostawcy.' },
-  confidential: { label: 'On-prem / klient', note: 'Poufne dokumenty pozostają w środowisku klienta.' },
-  regulated: { label: 'Isolated on-prem', note: 'Najpierw klasyfikacja prawna, DPIA i security review.' }
-};
-
-const sensitivity = document.querySelector('#router-sensitivity');
-const frequency = document.querySelector('#router-frequency');
-const routeLabel = document.querySelector('#route-label');
-const routeNote = document.querySelector('#route-note');
-const receipt = document.querySelector('#receipt');
-
-function updateRouter() {
-  const choice = routes[sensitivity.value];
-  const cadence = frequency.value;
-  routeLabel.textContent = choice.label;
-  routeNote.textContent = choice.note;
-  receipt.innerHTML = `<span>ROUTE / ${choice.label.toUpperCase()}</span><span>CADENCE / ${cadence.toUpperCase()}</span><span>APPROVAL / REQUIRED</span><span>LOG / ENABLED</span>`;
+const revealNodes = $$('.reveal');
+if (reduceMotion || !('IntersectionObserver' in window)) {
+  revealNodes.forEach((node) => node.classList.add('visible'));
+} else {
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+  revealNodes.forEach((node) => revealObserver.observe(node));
 }
-sensitivity.addEventListener('change', updateRouter);
-frequency.addEventListener('change', updateRouter);
-updateRouter();
 
-const form = document.querySelector('#lead-form');
-const status = document.querySelector('#form-status');
-form.addEventListener('submit', async event => {
-  event.preventDefault();
-  if (location.hostname.endsWith('github.io')) {
-    status.className = 'form-status success';
-    status.textContent = 'To publiczny showroom bez zbierania danych. Formularz zostanie podłączony dopiero po wdrożeniu polityki prywatności i bezpiecznego backendu.';
-    return;
-  }
-  status.className = 'form-status';
-  status.textContent = 'Analizuję workflow…';
-  const data = Object.fromEntries(new FormData(form).entries());
-  data.users = Number(data.users || 0);
-  data.consent = Boolean(data.consent);
-  try {
-    const response = await fetch('./api/leads', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(data) });
-    const result = await response.json();
-    if (!response.ok) throw new Error(`Uzupełnij pola: ${(result.errors || []).join(', ')}`);
-    status.className = 'form-status success';
-    status.innerHTML = `<strong>Brief zapisany: ${result.id}</strong><br>Wstępna ścieżka: ${result.qualification.route} · score ${result.qualification.score}/100.<br><small>Nic nie zostało wysłane automatycznie — zgłoszenie czeka na ludzką akceptację.</small>`;
-    form.reset();
-  } catch (error) {
-    status.className = 'form-status error';
-    status.textContent = error.message || 'Nie udało się zapisać zgłoszenia.';
-  }
+function runHeroIntro() {
+  if (reduceMotion || !window.anime) return;
+  anime.timeline({ easing: 'cubicBezier(.2,.8,.2,1)' })
+    .add({ targets: '.hero-piece', translateY: [70, 0], opacity: [0, 1], duration: 1050, delay: anime.stagger(110) })
+    .add({ targets: '.hero-orbit', scale: [.78, 1], opacity: [0, 1], rotate: ['-14deg', '0deg'], duration: 1500 }, '-=1100')
+    .add({ targets: '.signal-core', scale: [0, 1], opacity: [0, 1], duration: 700 }, '-=850');
+}
+if (document.readyState === 'complete') runHeroIntro();
+else addEventListener('load', runHeroIntro, { once: true });
+
+const hero = $('.hero');
+if (hero && 'IntersectionObserver' in window) {
+  const heroObserver = new IntersectionObserver(([entry]) => {
+    hero.classList.toggle('is-offscreen', !entry.isIntersecting);
+  }, { threshold: 0.02 });
+  heroObserver.observe(hero);
+}
+
+document.addEventListener('visibilitychange', () => {
+  hero?.classList.toggle('is-background', document.hidden);
 });
 
-const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-if (!reduced) {
-  animate('.hero .eyebrow', { opacity:[0,1], y:[18,0], duration:550, ease:'out(3)' });
-  animate('.hero h1', { opacity:[0,1], y:[50,0], duration:950, delay:100, ease:'out(4)' });
-  animate('.hero-bottom > *', { opacity:[0,1], y:[28,0], delay:stagger(130,{start:360}), duration:720, ease:'out(3)' });
+const castle = $('.castle-stage');
+const chapters = $$('.castle-chapters [data-castle-stage]');
+let currentStage = 1;
+let ticking = false;
+
+function activateStage(nextStage) {
+  if (!castle || nextStage === currentStage) return;
+  currentStage = nextStage;
+  castle.dataset.stage = String(nextStage);
+  const stageNumber = $('#stage-number');
+  if (stageNumber) stageNumber.textContent = String(nextStage).padStart(2, '0');
+  chapters.forEach((chapter) => chapter.classList.toggle('active', Number(chapter.dataset.castleStage) === nextStage));
+  if (!reduceMotion && window.anime) {
+    const layerSelectors = {
+      1: '.foundation', 2: '.wall', 3: '.tower', 4: '.bridge', 5: '.gate, .flag'
+    };
+    anime({
+      targets: layerSelectors[nextStage],
+      translateY: [24, 0],
+      opacity: [0, 1],
+      duration: 800,
+      delay: anime.stagger(90),
+      easing: 'cubicBezier(.16,.84,.3,1)'
+    });
+  }
 }
 
-const observer = new IntersectionObserver(entries => entries.forEach(entry => {
-  if (!entry.isIntersecting) return;
-  entry.target.classList.add('visible');
-  if (!reduced && entry.target.classList.contains('system-stage')) {
-    animate('.system-map article', { opacity:[0,1], y:[24,0], delay:stagger(100), duration:650, ease:'out(3)' });
-    animate('.system-beam i', { x:['0vw','82vw'], opacity:[0,1,1,0], duration:4200, loop:true, ease:'inOut(2)' });
+function updateCastleStage() {
+  ticking = false;
+  if (!castle || reduceMotion) return;
+  const focusY = innerHeight * 0.46;
+  let closest = chapters[0];
+  let distance = Infinity;
+  chapters.forEach((chapter) => {
+    const rect = chapter.getBoundingClientRect();
+    const chapterCenter = rect.top + rect.height * 0.35;
+    const nextDistance = Math.abs(chapterCenter - focusY);
+    if (nextDistance < distance) {
+      distance = nextDistance;
+      closest = chapter;
+    }
+  });
+  activateStage(Number(closest?.dataset.castleStage || 1));
+}
+
+if (castle) {
+  if ('IntersectionObserver' in window) {
+    const castleObserver = new IntersectionObserver(([entry]) => {
+      castle.classList.toggle('is-offscreen', !entry.isIntersecting);
+    }, { threshold: 0.02 });
+    castleObserver.observe(castle);
   }
-  if (!reduced && entry.target.classList.contains('cases')) {
-    animate('.case-rail article', { opacity:[0,1], y:[30,0], delay:stagger(110), duration:700, ease:'out(4)' });
+  if (reduceMotion) {
+    currentStage = 5;
+    castle.dataset.stage = '5';
+    $('#stage-number').textContent = '05';
+    chapters.forEach((chapter) => chapter.classList.add('active'));
+  } else {
+    addEventListener('scroll', () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(updateCastleStage);
+    }, { passive: true });
+    addEventListener('resize', updateCastleStage, { passive: true });
+    updateCastleStage();
   }
-  observer.unobserve(entry.target);
-}), { threshold: 0.12 });
-document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
+}
+
+const form = $('#audit-form');
+const statusBox = $('#form-status');
+
+function showStatus(message, type = '') {
+  if (!statusBox) return;
+  statusBox.className = `form-status ${type}`.trim();
+  statusBox.textContent = message;
+}
+
+if (form) {
+  if (publicHost) {
+    form.querySelector('button').disabled = true;
+    form.querySelector('button span').textContent = 'Formularz demo — bez zapisu';
+    showStatus('Publiczny showroom nie zapisuje danych. Produkcyjny kontakt zostanie uruchomiony po zatwierdzeniu domeny i polityki prywatności.');
+  }
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    if (publicHost) return;
+    if (!form.reportValidity()) return;
+
+    const button = form.querySelector('button');
+    const payload = Object.fromEntries(new FormData(form).entries());
+    payload.consent = form.elements.consent.checked;
+    payload.users = Number(payload.users || 5);
+    button.disabled = true;
+    showStatus('Sprawdzam dane i przygotowuję brief…');
+
+    try {
+      const response = await fetch('./api/intake', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const result = await response.json();
+      if (!response.ok) throw new Error(result.error || 'Nie udało się zapisać briefu.');
+      showStatus(`Brief zapisany: ${result.id}. Ścieżka: ${result.route}, score ${result.score}/100. Nic nie zostało wysłane automatycznie — zgłoszenie czeka na ludzką akceptację.`, 'success');
+      form.reset();
+    } catch (error) {
+      showStatus(error.message || 'Błąd połączenia. Spróbuj ponownie.', 'error');
+    } finally {
+      button.disabled = false;
+    }
+  });
+}

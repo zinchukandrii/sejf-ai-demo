@@ -35,9 +35,14 @@ try {
         };
       });
       if (route === '/' && width === 1366) {
-        await page.select('#router-sensitivity', 'confidential');
-        const routed = await page.$eval('#route-label', el => el.textContent.trim());
-        if (routed !== 'On-prem / klient') errors.push(`router mismatch: ${routed}`);
+        await page.evaluate(() => document.querySelector('[data-castle-stage="5"]')?.scrollIntoView({ block:'center', behavior:'instant' }));
+        await new Promise(resolve => setTimeout(resolve, 1600));
+        const castleState = await page.$eval('.castle-stage', el => ({ stage:el.dataset.stage, gate:Number(getComputedStyle(el.querySelector('.gate')).opacity), flag:Number(getComputedStyle(el.querySelector('.flag')).opacity) }));
+        if (castleState.stage !== '5' || castleState.gate < .9 || castleState.flag < .9) errors.push(`castle final mismatch: ${JSON.stringify(castleState)}`);
+        const hiddenReveals = await page.$$eval('.reveal', els => els.filter(el => Number(getComputedStyle(el).opacity) < .9 && el.getBoundingClientRect().top < innerHeight && el.getBoundingClientRect().bottom > 0).length);
+        if (hiddenReveals) errors.push(`visible reveal nodes hidden: ${hiddenReveals}`);
+        await page.evaluate(() => scrollTo({ top:0, behavior:'instant' }));
+        await new Promise(resolve => setTimeout(resolve, 500));
       }
       if (route === '/portal.html' && width === 1366) {
         await page.click('#queue-filter');
@@ -49,6 +54,24 @@ try {
       await page.close();
     }
   }
+  const reducedPage = await browser.newPage();
+  const reducedErrors = [];
+  reducedPage.on('pageerror', error => reducedErrors.push(error.message));
+  reducedPage.on('console', message => message.type() === 'error' && reducedErrors.push(message.text()));
+  await reducedPage.emulateMediaFeatures([{ name:'prefers-reduced-motion', value:'reduce' }]);
+  await reducedPage.setViewport({ width:390, height:844, deviceScaleFactor:1 });
+  const reducedResponse = await reducedPage.goto(`${base}/?qa=reduced-motion`, { waitUntil:'networkidle0', timeout:30000 });
+  const reducedData = await reducedPage.evaluate(() => {
+    const root = document.documentElement;
+    const hidden = [...document.querySelectorAll('.reveal')].filter(el => Number(getComputedStyle(el).opacity) < .99).length;
+    const running = document.getAnimations().filter(animation => animation.playState === 'running').length;
+    const cta = document.querySelector('.nav-cta');
+    const rect = cta?.getBoundingClientRect();
+    return { title:document.title, clientWidth:root.clientWidth, scrollWidth:root.scrollWidth, overflow:root.scrollWidth-root.clientWidth, h1:document.querySelector('h1')?.innerText, h1Rect:null, ctaVisible:!!rect?.width, syntheticBanner:false, hidden, running, stage:document.querySelector('.castle-stage')?.dataset.stage };
+  });
+  if (reducedData.hidden || reducedData.running || reducedData.stage !== '5') reducedErrors.push(`reduced motion mismatch: ${JSON.stringify({ hidden:reducedData.hidden, running:reducedData.running, stage:reducedData.stage })}`);
+  results.push({ route:'/reduced-motion', width:390, http:reducedResponse?.status(), errors:reducedErrors, ...reducedData });
+  await reducedPage.close();
 } finally { await browser.close(); }
 await writeFile('qa/matrix/results.json', JSON.stringify(results,null,2));
 const failures=results.filter(x=>x.http!==200 || x.overflow>0 || x.errors.length || !x.ctaVisible);

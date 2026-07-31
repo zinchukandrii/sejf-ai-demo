@@ -3,119 +3,183 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Prywatni agenci AI dla firm | SEJF AI</title>
-  <meta name="description" content="Wdrażamy prywatnych agentów AI do poufnych procesów firmowych: audyt, płatny pilot, kontrola człowieka i pełny evidence log.">
-  <meta property="og:title" content="SEJF AI — prywatni agenci, jawne dowody">
-  <meta property="og:description" content="Agent wykonuje pracę. Człowiek zatwierdza. System zachowuje dowód.">
-  <meta name="theme-color" content="#101210">
-  <link rel="canonical" href="https://example.invalid/">
+  <title>SEJF AI — systemy, które wykonują pracę</title>
+  <meta name="description" content="Projektujemy strony, aplikacje i kontrolowane systemy AI dla firm technicznych. Zobacz, z czego składa się agent i jak pracuje.">
+  <meta name="theme-color" content="#020817">
+  <meta property="og:title" content="SEJF AI — systemy, które wykonują pracę">
+  <meta property="og:description" content="Od procesu i danych do działającego narzędzia z kontrolą człowieka.">
+  <link rel="canonical" href="https://zinchukandrii.github.io/sejf-ai-demo/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./styles.css?v=3">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"SEJF AI","description":"Prywatni agenci AI dla poufnych workflow firmowych","areaServed":"PL","knowsAbout":["private AI","on-premise LLM","AI governance","workflow automation"]}</script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css?v=6">
 </head>
 <body>
-  <header class="nav"><a class="brand" href="#top">SEJF<span>/AI</span></a><nav><a href="#method">Metoda</a><a href="#cases">Use case’y</a><a href="#company">Firma</a><a href="./portal.html">Showroom</a><a class="nav-cta" href="#audit">Sprawdź proces</a></nav></header>
+  <a class="skip-link" href="#main">Przejdź do treści</a>
+  <header class="nav">
+    <a class="brand" href="#top" aria-label="SEJF AI — strona główna"><span>SEJF</span><i>/</i>AI</a>
+    <nav aria-label="Główna nawigacja">
+      <a href="#services">Usługi</a>
+      <a href="#agent">Jak działa agent</a>
+      <a href="#work">Przykłady</a>
+      <a class="nav-cta" href="#contact">Rozmowa <b>↗</b></a>
+    </nav>
+  </header>
 
-  <main id="top">
-    <section class="hero">
-      <div class="hero-no">01—26</div>
-      <p class="eyebrow">PRIVATE AI WORKS / POLAND / 2026</p>
-      <h1>Poufne procesy.<br><em>Jawne dowody.</em></h1>
-      <div class="hero-bottom">
-        <p class="lead">Budujemy agentów AI, którzy pracują na dokumentach firmy, respektują uprawnienia i zatrzymują się przed działaniem wymagającym decyzji człowieka.</p>
-        <div class="hero-actions"><a class="arrow-link" href="#audit">Zmapuj jeden workflow <b>↘</b></a><a class="ghost-link" href="./portal.html">Otwórz Control Room — demo</a></div>
-      </div>
-      <div class="signal"><span>253</span><p>źródła przeanalizowane przed zbudowaniem oferty</p><i>RESEARCH RECEIPT / 2026-07-30</i></div>
-    </section>
-
-    <section class="problem" id="method" data-reveal>
-      <div class="section-tag">02 / PROBLEM</div>
-      <h2>Chat odpowiada.<br>Firma potrzebuje <em>wykonania.</em></h2>
-      <div class="problem-copy"><p>Największy koszt AI nie siedzi w tokenach. Siedzi w chaosie uprawnień, niesprawdzonych źródłach, ręcznych poprawkach i ryzyku, że agent zrobi o jeden krok za dużo.</p><p>Dlatego zaczynamy od procesu, danych i dowodu — model wybieramy na końcu.</p></div>
-    </section>
-
-    <section class="method" data-reveal>
-      <div class="method-sticky"><span>SEJF METHOD</span><h2>Od pliku<br>do zatwierdzonej<br>czynności.</h2><p>Jedna ścieżka. Cztery kontrolowane granice.</p></div>
-      <ol>
-        <li><b>01</b><div><h3>Źródło z uprawnieniem</h3><p>Agent widzi tylko dokumenty, które widzi użytkownik.</p></div><span>ACCESS</span></li>
-        <li><b>02</b><div><h3>Odpowiedź z cytatem</h3><p>Każdy istotny wniosek wraca do konkretnego źródła.</p></div><span>GROUNDING</span></li>
-        <li><b>03</b><div><h3>Działanie z bramką</h3><p>Zapis, wysyłka i publikacja wymagają zatwierdzenia.</p></div><span>APPROVAL</span></li>
-        <li><b>04</b><div><h3>Receipt do audytu</h3><p>Wersja modelu, operator, źródło, decyzja i czas zostają w logu.</p></div><span>EVIDENCE</span></li>
-      </ol>
-    </section>
-
-    <section class="router" id="router" data-reveal>
-      <div class="section-tag light">03 / LIVE WORKLOAD ROUTER</div>
-      <div class="router-grid">
-        <div><h2>Nie wszystko<br>musi być lokalne.</h2><p>Dobieramy środowisko do danych, częstotliwości i kosztu. Sprawdź prostą wersję naszej logiki.</p>
-          <label>Wrażliwość danych<select id="router-sensitivity"><option value="public">Publiczne</option><option value="internal">Wewnętrzne</option><option value="confidential">Poufne</option><option value="regulated">Regulowane / szczególne</option></select></label>
-          <label>Częstotliwość<select id="router-frequency"><option value="occasional">Sporadycznie</option><option value="monthly">Miesięcznie</option><option value="weekly">Co tydzień</option><option value="daily">Codziennie</option></select></label>
+  <main id="main">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="hero-orbit orbit-a" aria-hidden="true"></div>
+      <div class="hero-orbit orbit-b" aria-hidden="true"></div>
+      <div class="signal-core" aria-hidden="true"><span></span><span></span><span></span></div>
+      <div class="shot-code">SCENE 01 — SYSTEM ONLINE</div>
+      <div class="hero-copy">
+        <p class="eyebrow hero-piece">STRONY · APLIKACJE · AGENCI AI</p>
+        <h1 id="hero-title" aria-label="Budujemy systemy, które wykonują pracę">
+          <span class="hero-piece">Budujemy</span>
+          <span class="hero-piece outline">systemy,</span>
+          <span class="hero-piece accent">które pracują.</span>
+        </h1>
+        <div class="hero-bottom hero-piece">
+          <p>Od pierwszego ekranu po ostatnią decyzję. Projektujemy cyfrowe narzędzia dla realnych procesów — z mierzalnym wynikiem i człowiekiem przy kontroli.</p>
+          <div class="hero-actions">
+            <a class="primary-cta" href="#agent"><span>Zobacz, jak powstaje agent</span><b>↓</b></a>
+            <a href="#services">Poznaj zakres usług</a>
+          </div>
         </div>
-        <div class="route-output"><span>RECOMMENDED ROUTE</span><strong id="route-label">—</strong><p id="route-note"></p><div class="architecture"><i>DATA</i><b>→</b><i>POLICY</i><b>→</b><i>MODEL</i><b>→</b><i>HUMAN</i></div><div id="receipt" class="receipt"></div><small>To demonstrator architektoniczny, nie ocena prawna ani oferta wiążąca.</small></div>
+      </div>
+      <div class="frame-index" aria-hidden="true"><b>01</b><span>05</span></div>
+    </section>
+
+    <section class="manifest reveal" aria-labelledby="manifest-title">
+      <div class="manifest-label">NASZA ZASADA</div>
+      <h2 id="manifest-title">Nie zaczynamy od modelu AI.<br><em>Zaczynamy od pracy, którą trzeba wykonać.</em></h2>
+      <p>Technologia jest dobierana do procesu, danych, ryzyka i budżetu. Czasem rozwiązaniem jest agent. Czasem dashboard, aplikacja albo dobrze zaprojektowana strona.</p>
+    </section>
+
+    <section class="services" id="services" aria-labelledby="services-title">
+      <header class="section-head reveal">
+        <span>02 / ZAKRES</span>
+        <h2 id="services-title">Co możemy<br><em>zbudować.</em></h2>
+      </header>
+      <div class="service-reel">
+        <article class="service-shot reveal">
+          <div class="shot-no">A01</div>
+          <div class="shot-visual web-shot" aria-hidden="true"><i></i><i></i><i></i><span>WEB / SHOWROOM</span></div>
+          <div class="shot-copy"><h3>Strony i demonstratory</h3><p>Strony firmowe, landing pages i interaktywne prezentacje, które pokazują produkt oraz proces zamiast tylko o nich opowiadać.</p><small>DESIGN · FRONTEND · PUBLIKACJA</small></div>
+        </article>
+        <article class="service-shot reveal">
+          <div class="shot-no">A02</div>
+          <div class="shot-visual app-shot" aria-hidden="true"><i></i><i></i><i></i><span>APP / CONTROL ROOM</span></div>
+          <div class="shot-copy"><h3>Aplikacje i dashboardy</h3><p>Portale, panele operacyjne, intake, kolejki, raporty, approval i monitoring jednej konkretnej pracy.</p><small>WORKFLOW · DANE · EVIDENCE</small></div>
+        </article>
+        <article class="service-shot reveal">
+          <div class="shot-no">A03</div>
+          <div class="shot-visual agent-shot" aria-hidden="true"><i></i><i></i><i></i><span>AGENT / AUTOMATION</span></div>
+          <div class="shot-copy"><h3>Agenci i automatyzacje</h3><p>Kontrolowane systemy analizujące dokumenty, przygotowujące raporty, klasyfikujące sprawy i przekazujące decyzję człowiekowi.</p><small>AI · INTEGRACJE · HUMAN APPROVAL</small></div>
+        </article>
+        <article class="service-shot reveal">
+          <div class="shot-no">A04</div>
+          <div class="shot-visual data-shot" aria-hidden="true"><i></i><i></i><i></i><span>KNOWLEDGE / RAG</span></div>
+          <div class="shot-copy"><h3>Dane i wiedza firmowa</h3><p>Wyszukiwanie dokumentów, odpowiedzi ze źródłami, analiza CSV/Excel i uporządkowane bazy wiedzy z dostępem według roli.</p><small>RAG · RAPORTY · UPRAWNIENIA</small></div>
+        </article>
       </div>
     </section>
 
-    <section class="offer" id="offer" data-reveal>
-      <div class="section-tag">04 / OFFER</div>
-      <h2>Najpierw dowód.<br>Potem infrastruktura.</h2>
-      <div class="offer-lines">
-        <article><span>01</span><h3>Audit Lite</h3><p>Proces, dane, ryzyko, baseline i warianty architektury.</p><b>8–15 tys. PLN netto*</b></article>
-        <article><span>02</span><h3>Paid Pilot</h3><p>Jeden workflow, mierzalne kryteria, syntetyczne lub odanonimizowane dane.</p><b>25–45 tys. PLN netto*</b></article>
-        <article><span>03</span><h3>Deployment</h3><p>Integracje, uprawnienia, monitoring, approval gates i evidence log.</p><b>75–150 tys. PLN netto*</b></article>
-        <article><span>04</span><h3>Evaluation / SLA</h3><p>Regresje jakości, aktualizacje modeli, bezpieczeństwo i raportowanie.</p><b>4–12 tys. PLN / mies.*</b></article>
-      </div><p class="fine">* Hipotezy cenowe do walidacji; końcowa wycena zależy od procesu, danych, integracji i wymagań klienta.</p>
-    </section>
-
-    <section class="system-stage" id="company" data-reveal>
-      <div class="section-tag light">05 / COMPANY OPERATING SYSTEM</div>
-      <header><h2>Firma jako system.<br><em>Nie zbiór slajdów.</em></h2><p>Każdy lead, audyt, pilot i wdrożenie przechodzi przez ten sam kontrolowany łańcuch. Dane klienta nigdy nie trafiają do publicznej warstwy.</p></header>
-      <div class="system-map" aria-label="Model operacyjny firmy">
-        <article data-node="market"><span>01</span><strong>MARKET</strong><p>Strona, research, kwalifikacja workflow</p><i>PUBLIC PLANE</i></article><b>→</b>
-        <article data-node="audit"><span>02</span><strong>AUDIT</strong><p>Dane, baseline, ryzyko, architektura</p><i>PAID DISCOVERY</i></article><b>→</b>
-        <article data-node="pilot"><span>03</span><strong>PILOT</strong><p>Syntetyczne dane, eval, approval gate</p><i>CONTROLLED TEST</i></article><b>→</b>
-        <article data-node="deploy"><span>04</span><strong>DEPLOY</strong><p>Integracje, RBAC, evidence, monitoring</p><i>PRIVATE PLANE</i></article><b>→</b>
-        <article data-node="sla"><span>05</span><strong>SLA</strong><p>Regresje, modele, incydenty, raport</p><i>RECURRING</i></article>
-        <div class="system-beam" aria-hidden="true"><i></i></div>
+    <section class="agent-story" id="agent" aria-labelledby="agent-title">
+      <div class="agent-intro reveal">
+        <span>03 / ANATOMIA AGENTA</span>
+        <h2 id="agent-title">Agent AI powstaje<br><em>jak bezpieczny zamek.</em></h2>
+        <p>Nie jest jednym promptem. To system warstw, które kolejno przyjmują dane, wykonują pracę, sprawdzają wynik i zatrzymują ryzykowne działanie.</p>
       </div>
-      <div class="company-layers"><div><span>PUBLIC</span><strong>Website + Workflow Router</strong><p>Sprzedaż i edukacja bez dostępu do prywatnych danych.</p></div><div><span>CLIENT</span><strong>Private Control Room</strong><p>Sprawy, akceptacje, jakość, modele i evidence receipts.</p></div><div><span>SEJF OPS</span><strong>Delivery Console</strong><p>Leady, audyty, pilotaże, SLA, bezpieczeństwo i ekonomia projektu.</p></div></div>
-      <a class="showroom-link" href="./portal.html"><span>LIVE SYNTHETIC SHOWROOM</span><strong>Zobacz, jak wygląda firmowy dashboard klienta</strong><b>↗</b></a>
-    </section>
 
-    <section class="cases" id="cases" data-reveal>
-      <div class="section-tag">06 / HIGH-VALUE WORKFLOWS</div>
-      <header><h2>Nie demo AI.<br><em>Proces do domknięcia.</em></h2><p>Cztery wejścia wynikające z analizy 253 źródeł. Każde zaczyna się od powtarzalnego dokumentu, kończy zatwierdzalnym wynikiem i zostawia dowód.</p></header>
-      <div class="case-rail">
-        <article><span>01 / MANUFACTURING</span><h3>Quality Evidence Agent</h3><p>Sprawdza specyfikacje, raporty i odchylenia; tworzy listę braków z cytatami dla kierownika jakości.</p><ul><li>Input: PDF / SharePoint / QMS</li><li>Gate: release lub akceptacja odchylenia</li><li>Output: evidence packet</li></ul></article>
-        <article><span>02 / LEGAL</span><h3>Contract Review Agent</h3><p>Porównuje umowę z polityką i wzorcem, oznacza klauzule oraz tworzy brief — bez samodzielnego zatwierdzania.</p><ul><li>Input: umowy i playbook</li><li>Gate: prawnik / owner kontraktu</li><li>Output: red flags + citations</li></ul></article>
-        <article><span>03 / BPO + FINANCE</span><h3>Document Exception Agent</h3><p>Klasyfikuje pakiety dokumentów klienta, wykrywa braki i przygotowuje sprawę do ręcznej decyzji.</p><ul><li>Input: skrzynka / DMS / ERP</li><li>Gate: księgowy lub controller</li><li>Output: exception queue</li></ul></article>
-        <article><span>04 / SOFTWARE + IP</span><h3>Private Knowledge Agent</h3><p>Odpowiada na bazie własnego kodu i dokumentacji, zachowując uprawnienia oraz link do źródła.</p><ul><li>Input: Git / wiki / tickets</li><li>Gate: merge, publikacja, customer reply</li><li>Output: grounded draft</li></ul></article>
+      <div class="castle-layout">
+        <div class="castle-stage-wrap">
+          <div class="castle-stage" data-stage="1" aria-label="Animowany schemat pięciu warstw agenta AI">
+            <div class="scene-sky" aria-hidden="true"><i></i><i></i><i></i></div>
+            <div class="castle-ground"></div>
+            <div class="castle-layer foundation"><span>01 · DANE</span></div>
+            <div class="castle-layer wall wall-left"><span>02</span></div>
+            <div class="castle-layer wall wall-right"><span>02</span></div>
+            <div class="castle-layer gate"><i></i><span>05 · APPROVAL</span></div>
+            <div class="castle-layer tower tower-left"><span>03</span></div>
+            <div class="castle-layer tower tower-right"><span>03</span></div>
+            <div class="castle-layer bridge"><span>04 · INTEGRACJE</span></div>
+            <div class="castle-layer flag"><i></i><span>CZŁOWIEK DECYDUJE</span></div>
+            <div class="data-stream" aria-hidden="true"><b></b><b></b><b></b></div>
+            <div class="castle-status"><i></i><span>WARSTWA <b id="stage-number">01</b> / 05</span></div>
+          </div>
+        </div>
+
+        <ol class="castle-chapters">
+          <li data-castle-stage="1" class="active reveal"><span>01 / FUNDAMENT</span><h3>Dane i kontekst</h3><p>Agent dostaje tylko potrzebne dokumenty, instrukcje i historię. Najpierw ustalamy ich źródło, jakość oraz poufność.</p></li>
+          <li data-castle-stage="2" class="reveal"><span>02 / MURY</span><h3>Workflow i reguły</h3><p>Kolejne kroki są jawne: odbierz, sprawdź, przeanalizuj, przygotuj wynik. Reguły ograniczają improwizację modelu.</p></li>
+          <li data-castle-stage="3" class="reveal"><span>03 / WIEŻE</span><h3>Modele i narzędzia</h3><p>Model językowy odpowiada za rozumowanie. Narzędzia pozwalają czytać pliki, liczyć, przeszukiwać bazę lub wywoływać API.</p></li>
+          <li data-castle-stage="4" class="reveal"><span>04 / MOSTY</span><h3>Integracje</h3><p>Agent może łączyć się z aplikacją, bazą, formularzem lub CRM — tylko w dozwolonym zakresie i z pełnym logiem.</p></li>
+          <li data-castle-stage="5" class="reveal"><span>05 / BRAMA</span><h3>Kontrola i zatwierdzenie</h3><p>Testy, cytowania i approval zatrzymują błędny wynik przed publikacją, wysłaniem albo zmianą danych.</p></li>
+        </ol>
       </div>
     </section>
 
-    <section class="founder" id="founder" data-reveal>
-      <div class="founder-index">AZ / 01</div><div><span>07 / FOUNDER PROFILE — DRAFT</span><h2>Andrii<br>Zinchuk.</h2></div><div class="founder-copy"><p class="founder-lead">Buduję systemy na styku <em>Industrial AI, Digital Manufacturing i Materials Science</em> — tam, gdzie model musi prowadzić do realnej, sprawdzalnej pracy.</p><p>SEJF AI powstaje z przekonania, że firmy nie potrzebują kolejnego okna czatu. Potrzebują kontrolowanego wykonania, widocznej odpowiedzialności i dowodu, który da się odtworzyć po fakcie.</p><div class="founder-signals"><span>POLAND → EU</span><span>WORKFLOW FIRST</span><span>EVIDENCE BY DESIGN</span></div><small>Tekst biograficzny jest roboczy i wymaga akceptacji przed publikacją.</small></div>
+    <section class="work" id="work" aria-labelledby="work-title">
+      <header class="section-head reveal">
+        <span>04 / PRZYKŁADOWE REALIZACJE</span>
+        <h2 id="work-title">Co może być<br><em>gotowym produktem.</em></h2>
+        <p class="section-note">Poniżej demonstratory i scenariusze produktowe — nie deklarujemy ich jako wdrożeń wykonanych dla klientów.</p>
+      </header>
+      <div class="work-grid">
+        <a class="work-feature reveal" href="./portal.html">
+          <div class="work-screen control-screen" aria-hidden="true"><div class="screen-top"></div><div class="screen-rail"></div><div class="screen-chart"><i></i><i></i><i></i><i></i></div><div class="screen-queue"><b></b><b></b><b></b></div></div>
+          <div class="work-meta"><span>DZIAŁAJĄCY DEMONSTRATOR</span><b>01</b></div>
+          <h3>Quality Control Room</h3><p>Kolejka spraw, statusy, routing, approval oraz syntetyczny evidence log.</p>
+        </a>
+        <article class="work-small reveal">
+          <div class="work-screen knowledge-screen" aria-hidden="true"><div></div><span>SOP-104</span><span>SPEC-28</span><span>REPORT-07</span></div>
+          <div class="work-meta"><span>KONCEPCJA PRODUKTOWA</span><b>02</b></div>
+          <h3>Engineering Knowledge</h3><p>Asystent dokumentacji odpowiadający ze źródłami i uprawnieniami.</p>
+        </article>
+        <article class="work-small reveal">
+          <div class="work-screen validation-screen" aria-hidden="true"><i></i><i></i><i></i><div></div></div>
+          <div class="work-meta"><span>KONCEPCJA PRODUKTOWA</span><b>03</b></div>
+          <h3>Process Change Tracker</h3><p>Ryzyko, test, kryterium odbioru, wynik i zatwierdzenie zmiany.</p>
+        </article>
+      </div>
     </section>
 
-    <section class="not-us" data-reveal><div><span>NIE SPRZEDAJEMY</span><h2>„Lokalnego ChatGPT”.</h2></div><ul><li>Nie obiecujemy zgodności „z pudełka”.</li><li>Nie kupujemy GPU przed pomiarem obciążenia.</li><li>Nie automatyzujemy publikacji ani decyzji wysokiego ryzyka bez człowieka.</li><li>Nie używamy danych klienta w demo bez formalnej zgody.</li></ul></section>
+    <section class="voices" aria-labelledby="voices-title">
+      <div class="voices-head reveal"><span>05 / JAKI EFEKT CHCEMY OSIĄGNĄĆ</span><h2 id="voices-title">Opinie, na które<br><em>trzeba zapracować.</em></h2><p>To przykładowe oczekiwane rezultaty po udanym pilocie. Nie są referencjami prawdziwych klientów.</p></div>
+      <div class="voice-track">
+        <blockquote class="reveal"><small>SCENARIUSZ OPINII · NIE REFERENCJA</small><p>„W końcu widzimy, gdzie zatrzymuje się sprawa i kto powinien podjąć decyzję.”</p><footer>OCZEKIWANY EFEKT / TRANSPARENTNOŚĆ</footer></blockquote>
+        <blockquote class="reveal"><small>SCENARIUSZ OPINII · NIE REFERENCJA</small><p>„Raport, który zajmował kilka godzin, powstaje jako draft w kilka minut — nadal go zatwierdzamy.”</p><footer>OCZEKIWANY EFEKT / CZAS</footer></blockquote>
+        <blockquote class="reveal"><small>SCENARIUSZ OPINII · NIE REFERENCJA</small><p>„Asystent nie zgaduje. Pokazuje dokument, wersję i fragment, na którym opiera odpowiedź.”</p><footer>OCZEKIWANY EFEKT / EVIDENCE</footer></blockquote>
+      </div>
+    </section>
 
-    <section class="audit" id="audit" data-reveal>
-      <div class="audit-head"><div class="section-tag light">05 / WORKFLOW INTAKE</div><h2>Opisz jeden proces.<br><em>System zbuduje brief.</em></h2><p>Formularz działa lokalnie: ocenia dopasowanie, zapisuje brief i umieszcza go w kolejce ludzkiej akceptacji. Nie wysyła automatycznego outreachu.</p></div>
-      <form id="lead-form">
-        <div class="two"><label>Firma<input required name="company" autocomplete="organization"></label><label>Imię i nazwisko<input required name="name" autocomplete="name"></label></div>
-        <label>E-mail służbowy<input required type="email" name="email" autocomplete="email"></label>
-        <label>Jaki proces powtarza się i dziś wymaga ręcznej pracy?<textarea required minlength="20" name="workflow" rows="4"></textarea></label>
-        <label>Jaki wynik ma powstać i kto go zatwierdza?<textarea name="outcome" rows="3"></textarea></label>
-        <div class="two"><label>Wrażliwość danych<select required name="sensitivity"><option value="">Wybierz</option><option value="public">Publiczne</option><option value="internal">Wewnętrzne</option><option value="confidential">Poufne</option><option value="regulated">Regulowane / szczególne</option></select></label><label>Częstotliwość<select required name="frequency"><option value="">Wybierz</option><option value="occasional">Sporadycznie</option><option value="monthly">Miesięcznie</option><option value="weekly">Co tydzień</option><option value="daily">Codziennie</option></select></label></div>
-        <div class="two"><label>Liczba użytkowników<input type="number" min="1" max="100000" name="users" value="5"></label><label>Systemy / repozytoria<input name="systems" placeholder="np. SharePoint, ERP, foldery PDF"></label></div>
-        <label class="consent"><input type="checkbox" name="consent" required> Zgadzam się na lokalne zapisanie danych formularza w celu przygotowania briefu. To środowisko demonstracyjne — nie wpisuję danych klientów ani informacji szczególnie chronionych.</label>
-        <button type="submit">Utwórz prywatny brief <span>↘</span></button><div id="form-status" class="form-status" role="status" aria-live="polite"></div>
+    <section class="contact" id="contact" aria-labelledby="contact-title">
+      <div class="contact-copy reveal">
+        <span>06 / START</span>
+        <h2 id="contact-title">Jeden proces.<br><em>Pierwszy działający krok.</em></h2>
+        <p>Opisz pracę, która dziś zabiera czas, gubi informacje albo wymaga ręcznego pilnowania. Ocenimy, czy warto budować aplikację, automatyzację lub agenta.</p>
+        <a href="./portal.html" class="portal-link"><span>ZOBACZ DEMO CONTROL ROOM</span><b>↗</b></a>
+      </div>
+      <form id="audit-form" class="reveal" novalidate>
+        <div class="field-row"><label>Firma<input name="company" required autocomplete="organization"></label><label>Osoba kontaktowa<input name="name" required autocomplete="name"></label></div>
+        <label>E-mail służbowy<input type="email" name="email" required autocomplete="email" spellcheck="false"></label>
+        <label>Jaki proces chcesz usprawnić?<textarea name="workflow" rows="3" required minlength="20"></textarea></label>
+        <label>Jak ma wyglądać dobry rezultat?<textarea name="outcome" rows="2"></textarea></label>
+        <label>Systemy lub źródła danych<input name="systems" placeholder="np. Excel, SharePoint, ERP…"></label>
+        <div class="field-row"><label>Wrażliwość danych<select name="sensitivity" required><option value="public">Publiczne</option><option value="internal">Wewnętrzne</option><option value="confidential">Poufne</option><option value="regulated">Regulowane</option></select></label><label>Częstotliwość<select name="frequency" required><option value="occasional">Sporadycznie</option><option value="weekly">Co tydzień</option><option value="daily">Codziennie</option><option value="continuous">Ciągle</option></select></label></div>
+        <input type="hidden" name="users" value="5">
+        <label class="consent"><input type="checkbox" name="consent" required><span>Zgadzam się na wykorzystanie danych wyłącznie do oceny zgłoszenia. Formularz demonstracyjny nie wysyła wiadomości bez ludzkiej akceptacji.</span></label>
+        <button type="submit"><span>Przygotuj brief</span><b>↗</b></button>
+        <div id="form-status" class="form-status" role="status" aria-live="polite"></div>
       </form>
     </section>
   </main>
 
-  <footer><a class="brand" href="#top">SEJF<span>/AI</span></a><p>WORKING BRAND / PRIVATE AI PRODUCTIZED SERVICE / POLAND 2026</p><div><a href="mailto:hello@example.invalid">Kontakt</a><a href="#audit">Audit intake</a></div></footer>
-  <script type="module" src="./app.js?v=3"></script>
+  <footer class="site-footer"><a class="brand" href="#top"><span>SEJF</span><i>/</i>AI</a><p>DEMONSTRATOR · DANE SYNTETYCZNE · CZŁOWIEK DECYDUJE</p><a href="#top">Powrót ↑</a></footer>
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js" defer></script>
+  <script src="./app.js?v=6" defer></script>
 </body>
 </html>
