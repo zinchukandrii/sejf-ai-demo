@@ -4,7 +4,7 @@ import { mkdir, writeFile } from 'node:fs/promises';
 const chrome = process.env.SEJF_QA_CHROME || '/home/andrii_zinchuk/.cache/sejf-qa-chrome/chrome-headless-shell-linux64/chrome-headless-shell';
 const base = process.env.BASE_URL || 'http://127.0.0.1:4177';
 const widths = [320,390,768,1366,1920,2560,3840];
-const routes = ['/', '/portal.html'];
+const routes = ['/', '/uslugi.html', '/jak-pracujemy.html', '/realizacje.html', '/kontakt.html', '/portal.html'];
 const results = [];
 await mkdir('qa/matrix', { recursive:true });
 
@@ -31,7 +31,9 @@ try {
           h1:h1?.innerText,
           h1Rect:h1 ? {left:h1.getBoundingClientRect().left,right:h1.getBoundingClientRect().right,width:h1.getBoundingClientRect().width}:null,
           ctaVisible:visible(cta),
-          syntheticBanner:document.body.innerText.includes('SYNTHETIC DATA')
+          syntheticBanner:document.body.innerText.includes('SYNTHETIC DATA'),
+          taskbarItems:document.querySelectorAll('.taskbar a').length,
+          taskbarActive:document.querySelectorAll('.taskbar a.active').length
         };
       });
       if (route === '/' && width === 1366) {
@@ -49,7 +51,11 @@ try {
         const allRows = await page.$$eval('.queue-row', els => els.length);
         if (allRows !== 4) errors.push(`queue filter mismatch: ${allRows}`);
       }
-      if ([390,1366].includes(width)) await page.screenshot({ path:`qa/matrix/${route==='/'?'home':'portal'}-${width}.png`, fullPage:false });
+      if (route !== '/portal.html' && (data.taskbarItems !== 5 || data.taskbarActive !== 1)) errors.push(`taskbar mismatch: ${data.taskbarItems}/${data.taskbarActive}`);
+      if ([390,1366].includes(width)) {
+        const pageName = route === '/' ? 'home' : route.replace(/^\//,'').replace('.html','');
+        await page.screenshot({ path:`qa/matrix/${pageName}-${width}.png`, fullPage:false });
+      }
       results.push({ route,width,http:response?.status(),errors,...data });
       await page.close();
     }
