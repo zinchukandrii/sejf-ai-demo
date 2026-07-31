@@ -1,0 +1,7 @@
+node_modules/
+data/
+qa/
+chrome-headless-shell/
+.env
+.env.*
+.DS_Store

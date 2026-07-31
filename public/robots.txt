@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /
+# Working demo. Enable indexing only after brand, domain, privacy notice and publication approval.
